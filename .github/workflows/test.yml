@@ -4,14 +4,18 @@ name: CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [main]
+    branches-ignore:
+      - dependabot/npm_and_yarn/**
+    tags:
+      - "*"
+  schedule:
+    - cron: "0 1 * * *"
   pull_request:
-    branches: [main]
-    types: [assigned, opened, synchronize, reopened, labeled]
-  # Allows you to run this workflow manually from the Actions tab
+    types: [labeled]
   workflow_dispatch:
+    branches:
+      - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -28,6 +32,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
+      - name: Get the version
+        id: vars
+        run: |
+          echo ::set-output name=tag::$(echo ${GITHUB_REF/refs\/tags\//})
+          echo ::set-output name=sha::$(echo ${GITHUB_SHA})
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
@@ -35,5 +44,4 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: My first step
-        if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && (github.event.label.name == 'pepito') }}
-        run: echo ${{GITHUB_SHA}}
+        run: echo "${{steps.vars.outputs.tag}} ${{steps.vars.outputs.sha}}"
