@@ -35,5 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: My first step
-        if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && contains(github.event.issue.labels.*.name, 'pepito') }}
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'labeled' && (github.event.label.name == 'pepito') }}
         run: echo This event is a pull request that has a label called pepito
