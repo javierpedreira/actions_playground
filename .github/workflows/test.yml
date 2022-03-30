@@ -27,7 +27,7 @@ jobs: # This workflow contains a single job called "build"
     steps:
       - name: Get the version
         id: vars
-        run: echo ::set-output name=tag::$(if [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$GITHUB_EVENT_NAME" == "schedule" ]; then echo $GITHUB_SHA; else echo ${GITHUB_REF/refs\/tags\//}; fi)
+        run: echo ::set-output name=tag::$(if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$GITHUB_EVENT_NAME" == "schedule" ]]; then echo $GITHUB_SHA; else echo ${GITHUB_REF/refs\/tags\//}; fi)
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
