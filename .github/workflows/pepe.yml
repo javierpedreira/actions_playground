@@ -2,7 +2,16 @@ name: pepe
 
 on:
   workflow_call:
-
+    inputs:
+      service:
+        required: true
+        type: string
+      repo:
+        required: true
+        type: string
+      condition:
+        required: false
+        type: boolean
 jobs:
   test-auto-builds:
     runs-on: ubuntu-latest
@@ -12,5 +21,8 @@ jobs:
       BRANCH: "staging-ie-auto-deploy"
     steps:
       - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo Releasing libs!
+      - name: Run a one-line script ${{ inputs.service }}
+        run: echo Releasing libs! ${{ inputs.service }} ${{ inputs.repo }}
+      - name: Runs if true
+        run: echo Releasing libs IF I CAN! ${{ inputs.service }} ${{ inputs.repo }}
+        if: ${{ inputs.condition }}

@@ -115,4 +115,9 @@ jobs: # This workflow contains a single job called "build"
         run: echo Releasing libs!
 
   deploy-to-staging:
+    # if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') || github.event_name == 'schedule'}}
     uses: javierpedreira/actions_playground/.github/workflows/pepe.yml@main
+    with:
+      repo: manolo
+      service: pepe
+      condition: ${{ github.event_name != 'push' }}
