@@ -11,5 +11,6 @@ jobs:
       REPO: "insights-explorer"
       BRANCH: "staging-ie-auto-deploy"
   steps:
+    - uses: actions/checkout@v2
     - name: Run a one-line script
       run: echo Releasing libs!
