@@ -115,4 +115,4 @@ jobs: # This workflow contains a single job called "build"
         run: echo Releasing libs!
 
   deploy-to-staging:
-    uses: javierpedreira/actions_playground/workflows/pepe.yml@main
+    uses: javierpedreira/actions_playground/.github/workflows/pepe.yml@main
