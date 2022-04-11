@@ -117,4 +117,4 @@ jobs: # This workflow contains a single job called "build"
   deploy-to-staging:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/pepe
+      - uses: ./.github/workflows/pepe@main
