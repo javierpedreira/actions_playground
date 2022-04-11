@@ -22,6 +22,10 @@ jobs: # This workflow contains a single job called "build"
   test-api:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      ENV: "pepe"
+      REPO: "manolor"
+      BRANCH: "pituso"
     if: ${{!startsWith(github.event.head_commit.message, 'docs:')}}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -73,6 +77,15 @@ jobs: # This workflow contains a single job called "build"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Running validator!
+      - name: Create deployment file content for insights-explorer
+        id: craftDeploymentFile
+        run: |
+          echo "::set-output name=content::$( echo -e "version: 658f39cbe1126d0b9ffe8ac8bcef8d2a1e715684\r\nrepository: insights-explorer" | base64 )"
+      - name: LALALA $ENV $REPO ${{ env.BRANCH }}
+        run: |
+          echo -e "version: 658f39cbe1126d0b9ffe8ac8bcef8d2a1e715684\r\nrepository: insights-explorer" | base64 | tr -d "\t\n\r" > config
+      - name: Read config file
+        run: echo $(cat config)
 
   publish-docker2:
     # The type of runner that the job will run on
@@ -87,7 +100,6 @@ jobs: # This workflow contains a single job called "build"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo  publish-docker2!
-
   release-libraries:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
