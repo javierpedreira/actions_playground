@@ -2,10 +2,6 @@ name: pepe
 
 on:
   workflow_call:
-    inputs:
-      username:
-        required: false
-        type: string
 
 jobs:
   test-auto-builds:
