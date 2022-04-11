@@ -113,3 +113,8 @@ jobs: # This workflow contains a single job called "build"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Releasing libs!
+
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/pepe
