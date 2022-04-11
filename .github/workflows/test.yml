@@ -115,6 +115,4 @@ jobs: # This workflow contains a single job called "build"
         run: echo Releasing libs!
 
   deploy-to-staging:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: javierpedreira/actions_playground/workflows/pepe.yml@main
+    uses: javierpedreira/actions_playground/workflows/pepe.yml@main
