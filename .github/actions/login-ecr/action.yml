@@ -1,0 +1,20 @@
+name: "Login to ECR"
+description: "Action to log into AWS to pull/push from the ECR registry"
+outputs:
+  registry:
+    value: ${{ steps.outputs.registry }}
+    description: "ECR registry value to store docker images"
+runs:
+  using: "composite"
+  steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: "${{ secrets.key }}"
+        aws-secret-access-key: "${{ secrets.pwd }}"
+        aws-region: us-east-1
+        role-to-assume: "arn:aws:iam::071494471915:role/ecr_writer"
+        role-duration-seconds: 3600
+    - name: Login to Amazon ECR
+      id: registry
+      uses: aws-actions/amazon-ecr-login@v1

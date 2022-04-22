@@ -114,6 +114,24 @@ jobs: # This workflow contains a single job called "build"
       - name: Run a one-line script
         run: echo Releasing libs!
 
+  job-that-calls-actions:
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Say hello"
+        uses: ./.github/actions/say-hello
+        with:
+          name: "Manolo"
+      - name: "Get random number"
+        uses: ./.github/actions/random
+        id: foo
+        with:
+          who-to-greet: "Mona the Octocat"
+      - name: Echoing output
+        run: echo random-number ${{ steps.foo.outputs.random-number }}
+        shell: bash
+
   deploy-to-staging:
     # if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') || github.event_name == 'schedule'}}
     uses: javierpedreira/actions_playground/.github/workflows/pepe.yml@main

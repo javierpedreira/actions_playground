@@ -1,0 +1,17 @@
+name: "PEPE"
+description: "This action is awesome"
+inputs:
+  name:
+    description: "Your name"
+    default: "No name provided"
+outputs:
+  result:
+    value: "pepe"
+    description: "My pepe test"
+runs:
+  using: "composite"
+  steps:
+    - run: echo Hello ${{ inputs.name }}.
+      shell: bash
+    - run: echo "Nice to meet you!"
+      shell: pwsh
