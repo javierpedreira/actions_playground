@@ -58,7 +58,7 @@ jobs: # This workflow contains a single job called "build"
         uses: juliangruber/find-pull-request-action@v1
         id: find-pull-request
         with:
-          branch: pepe-pepin-1
+          branch: pepe-pepin
       - run: echo "Pull Request ${{steps.find-pull-request.outputs.number}} (${{steps.find-pull-request.outputs.head-sha}})"
 
   publish-docker1:
