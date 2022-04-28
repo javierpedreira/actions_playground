@@ -52,6 +52,7 @@ jobs: # This workflow contains a single job called "build"
       - name: Run a one-line script
         run: echo Testing the FE!
   test-something:
+    runs-on: ubuntu-latest
     steps:	
       - name: Find Pull Request
         uses: juliangruber/find-pull-request-action@v1
