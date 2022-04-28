@@ -51,6 +51,14 @@ jobs: # This workflow contains a single job called "build"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Testing the FE!
+  test-something:
+    steps:	
+      - name: Find Pull Request
+        uses: juliangruber/find-pull-request-action@v1
+        id: find-pull-request
+        with:
+          branch: my-branch-name
+      - run: echo "Pull Request ${number} (${sha})"
 
   publish-docker1:
     # The type of runner that the job will run on
