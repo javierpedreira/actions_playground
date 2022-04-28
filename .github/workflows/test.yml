@@ -53,13 +53,13 @@ jobs: # This workflow contains a single job called "build"
         run: echo Testing the FE!
   test-something:
     runs-on: ubuntu-latest
-    steps:	
+    steps:
       - name: Find Pull Request
         uses: juliangruber/find-pull-request-action@v1
         id: find-pull-request
         with:
-          branch: pepe-pepin-1 
-      - run: echo "Pull Request ${number} (${sha})"
+          branch: pepe-pepin-1
+      - run: echo "Pull Request ${{steps.find-pull-request.outputs.number}} (${{steps.find-pull-request.outputs.head-sha}})"
 
   publish-docker1:
     # The type of runner that the job will run on
