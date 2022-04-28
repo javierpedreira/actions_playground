@@ -51,15 +51,14 @@ jobs: # This workflow contains a single job called "build"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Testing the FE!
-  test-something:
+  find-pr-by-criteria:
     runs-on: ubuntu-latest
     steps:
-      - name: Find Pull Request
-        uses: juliangruber/find-pull-request-action@v1
+      - run: echo ::set-output name=number::$(gh pr list)
         id: find-pull-request
-        with:
-          branch: pepe-pepin
-      - run: echo "Pull Request ${{steps.find-pull-request.outputs.number}} (${{steps.find-pull-request.outputs.head-sha}})"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN_PUBLISH }}
+      - run: echo "Pull Request ${{steps.find-pull-request.outputs.number}}"
 
   publish-docker1:
     # The type of runner that the job will run on
