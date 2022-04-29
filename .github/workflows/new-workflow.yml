@@ -12,6 +12,6 @@ jobs:
       - name: Get blob of deployment branch
         id: prs
         run: |
-          echo "::set-output name=open::$( curl -s -f -XGET -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github.v3+json' 'https://api.github.com/repos/javierpedreira/actions_playground/pulls?state=open')"
+          echo "::set-output name=open::$( curl -s -f -XGET -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github.v3+json' 'https://api.github.com/repos/javierpedreira/actions_playground/pulls?state=open' | jq -r .title)"
       - name: prs
         run: echo '${{ steps.prs.outputs.open }}'
