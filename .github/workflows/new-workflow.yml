@@ -1,6 +1,6 @@
 name: new-workflow
 
-on: 
+on:
   push:
     branches:
       - main
@@ -13,6 +13,9 @@ jobs:
         id: vars
         run: |
           echo "::set-output name=pr::$( curl -s -f -XGET -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' -H 'Accept: application/vnd.github.v3+json' 'https://api.github.com/repos/javierpedreira/actions_playground/pulls?state=open' | jq '.[0]' | jq '.title | contains("prueba")'  )"
+      - name: Cancel workflow if there is already an open PR
+        uses: andymckay/cancel-action@0.2
+        if: ${{ steps.vars.outputs.pr }}
       - name: prs
         if: ${{ !steps.vars.outputs.pr }}
         run: echo ${{ steps.vars.outputs.pr }}
