@@ -54,11 +54,14 @@ jobs: # This workflow contains a single job called "build"
   find-pr-by-criteria:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ::set-output name=number::$(gh pr list)
-        id: find-pull-request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN_PUBLISH }}
-      - run: echo "Pull Request ${{steps.find-pull-request.outputs.number}}"
+      - name: listPullRequests
+        uses: buildsville/list-pull-requests@v1
+        id: list
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          labels: '["scalafix"]'
+      - name: output
+        run: echo '${{ steps.list.outputs.pulls }}'
 
   publish-docker1:
     # The type of runner that the job will run on
