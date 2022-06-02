@@ -25,6 +25,7 @@ version-resolver:
   minor:
     labels:
       - 'medium'
+      - 'low'
       - 'feature'
   default: minor
   
