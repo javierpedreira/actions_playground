@@ -10,20 +10,21 @@ template: |
   ## QA report
 categories:
   - title: '💥 High Risk changes'
-    label: 'minor'
-  - title: '⚠️ Medium Risk changes'
     label: 'major'
+  - title: '⚠️ Medium Risk changes'
+    label: 'medium'
+  - title: '✨ New thingies'
+    label: 'feature'
+  - title: '🐛 Bug fixes'
+    label: 'bug'    
 version-resolver:
   major:
     labels:
-      - 'HIGH_RISK'
-      - 'BREAKING_CHANGE'
+      - 'major'
+      - 'RED_ALERT'
   minor:
     labels:
-      - 'MEDIUM_RISK'
-      - 'LOW_RISK'
-  patch:
-    labels:
-      - 'HOTFIX'
+      - 'medium'
+      - 'feature'
   default: minor
   
