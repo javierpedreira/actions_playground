@@ -1,0 +1,29 @@
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+
+template: |
+  ## What’s Changed
+  $CHANGES
+  ## Steps to rolback
+  1. Rollback to [$PREVIOUS_TAG](https://github.com/javierpedreira/actions_playground/releases/$PREVIOUS_TAG) 
+  **Full Changelog**: https://github.com/javierpedreira/actions_playground/compare/$PREVIOUS_TAG...$RESOLVED_VERSION
+  ## QA report
+categories:
+  - title: '💥 High Risk changes'
+    label: 'minor'
+  - title: '⚠️ Medium Risk changes'
+    label: 'major'
+version-resolver:
+  major:
+    labels:
+      - 'HIGH_RISK'
+      - 'BREAKING_CHANGE'
+  minor:
+    labels:
+      - 'MEDIUM_RISK'
+      - 'LOW_RISK'
+  patch:
+    labels:
+      - 'HOTFIX'
+  default: minor
+  
