@@ -1,0 +1,17 @@
+name: Release Drafter
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: boolean
+        description: This is a boolean
+        required: false
+        default: false
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo ${{ github.event.inputs.name }}
