@@ -12,6 +12,8 @@ on:
       condition:
         required: false
         type: boolean
+  workflow_dispatch:
+  
 jobs:
   job1:
     runs-on: ubuntu-latest
